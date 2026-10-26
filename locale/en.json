@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Notification Chime",
+    "description": "Plays a short chime inside the DeepSeek Harness app when a task finishes or a human approval is needed."
+  }
+}

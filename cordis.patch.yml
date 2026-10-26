@@ -1,0 +1,3 @@
+- insert:
+    - id: notification-chime
+      name: '@local/notification-chime'
