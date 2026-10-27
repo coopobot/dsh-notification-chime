@@ -5,6 +5,14 @@
   "description": "Plays a chime inside the DeepSeek Harness app when a task finishes or a human approval is needed.",
   "type": "module",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/coopobot/dsh-notification-chime.git"
+  },
+  "homepage": "https://github.com/coopobot/dsh-notification-chime#readme",
+  "bugs": {
+    "url": "https://github.com/coopobot/dsh-notification-chime/issues"
+  },
   "keywords": [
     "deepseek",
     "deepseek-harness",

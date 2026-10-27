@@ -45,17 +45,39 @@ Notification Chime plays a short, distinct sound inside the app and adds a setti
 
 This repository is itself a DSH bundle package.
 
+**The install UI lives on the sidebar's Plugins page**, not under Settings → Plugins — the latter is a read-only inventory of built-in plugins and runtime status, with no install action.
+
+### Option 1: install from a local checkout (recommended)
+
 1. Clone it:
 
    ```bash
-   git clone https://github.com/<your-name>/notification-chime.git
+   git clone https://github.com/coopobot/dsh-notification-chime.git
    ```
 
-2. Install the local bundle from DSH:
-   - use **Plugin Manager → install a local bundle** and point it at the checkout, or
-   - ask the agent to call `plugin_manager` `install_bundle` with the absolute checkout path.
+2. Open the **Plugins** panel in the left sidebar.
+3. Press **Add plugin**, or open its arrow and choose **Install a third-party plugin**.
+4. Enter the absolute path of the checkout in the package field, for example:
 
-3. No restart is required. If the settings row does not appear immediately, refresh the page once.
+   ```text
+   C:\Users\me\dsh-notification-chime
+   ```
+
+5. Confirm the install. The bundle is enabled by default; refresh the page once if the settings row does not appear immediately.
+
+### Option 2: install from a Git address
+
+After pushing to GitHub, enter the Git address in the same dialog:
+
+```text
+https://github.com/coopobot/dsh-notification-chime
+```
+
+The Host checks the repository with `git ls-remote` before pnpm installs it. Private repositories use this machine's Git credentials.
+
+### Option 3: install the local bundle through the agent
+
+Ask the DSH agent to call `plugin_manager` `install_bundle` with the absolute checkout path. Handy for development.
 
 > The package name `@local/notification-chime` is a local-link placeholder, not a publishable npm scope. See [Publishing](#publishing) before publishing.
 
@@ -108,9 +130,14 @@ Every tone is a sine/triangle oscillator with an attack/decay envelope; no audio
 
 **The settings row is missing**
 
-- Confirm the bundle is enabled in Plugin Manager.
+- Confirm the bundle is enabled on the Plugins page.
 - Refresh the page and search for "chime" in Settings → General.
 - Check Harness logs for a Client plugin load failure.
+
+**Cannot find the install UI**
+
+- The install UI is the **Plugins** panel in the left sidebar, not **Settings → Plugins** (read-only inventory).
+- Expand the sidebar if it is collapsed; Plugins and Schedules share the global panel icon group.
 
 **A finished task does not chime**
 
@@ -146,11 +173,11 @@ git init
 git add .
 git commit -m "feat: initial notification-chime plugin"
 git branch -M main
-git remote add origin https://github.com/<your-name>/notification-chime.git
+git remote add origin https://github.com/coopobot/dsh-notification-chime.git
 git push -u origin main
 ```
 
-Suggested repository name: `notification-chime` or `dsh-notification-chime`.
+Repository: https://github.com/coopobot/dsh-notification-chime
 
 ### npm
 

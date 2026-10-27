@@ -45,17 +45,39 @@ DeepSeek Harness 的任务可能运行较久。切到其他窗口后，你很难
 
 本仓库本身就是一个 DSH bundle 包。
 
+**安装入口在左侧边栏的「插件」页面**，不是「设置 → 插件」——后者只是内置插件与运行时状态的只读清单，没有安装按钮。
+
+### 方式一：从本地目录安装（推荐）
+
 1. 克隆仓库：
 
    ```bash
-   git clone https://github.com/<your-name>/notification-chime.git
+   git clone https://github.com/coopobot/dsh-notification-chime.git
    ```
 
-2. 在 DSH 中安装本地 bundle：
-   - 打开**插件管理**，选择从本地目录安装 bundle，指向仓库目录；或
-   - 让 Agent 使用 `plugin_manager` 的 `install_bundle`，`target` 填仓库绝对路径。
+2. 点击 Harness 左侧边栏的 **插件**（Plugins）面板。
+3. 点击右上角 **添加插件**；或点旁边的箭头，选择 **安装第三方插件**。
+4. 在包名输入框中填入仓库目录的**绝对路径**，例如：
 
-3. 安装完成后无需重启。如果页面暂时没有出现设置项，刷新一次页面。
+   ```text
+   C:\Users\me\dsh-notification-chime
+   ```
+
+5. 按提示检查并安装。安装完成后 bundle 默认启用；如果设置项没有马上出现，刷新一次页面。
+
+### 方式二：从 Git 地址安装
+
+仓库推送到 GitHub 后，在同一个「添加插件」对话框中填 Git 地址：
+
+```text
+https://github.com/coopobot/dsh-notification-chime
+```
+
+Host 会先用 `git ls-remote` 检查仓库，再由 pnpm 安装。私有仓库需要当前机器的 Git 凭据。
+
+### 方式三：让 Agent 安装本地 bundle
+
+克隆仓库后，让 DSH Agent 调用 `plugin_manager` 的 `install_bundle`，`target` 填仓库绝对路径。适合开发调试。
 
 > 当前包名 `@local/notification-chime` 中的 `@local` 仅用于本地链接安装，不是可发布到 npm 的 scope。发布前请按[发布](#发布到-github-与-npm)一节修改。
 
@@ -108,9 +130,14 @@ DeepSeek Harness 的任务可能运行较久。切到其他窗口后，你很难
 
 **设置里找不到「通知提示音」**
 
-- 确认 bundle 已启用（插件管理 → 已安装）。
+- 确认 bundle 已启用（插件 → 已安装插件）。
 - 刷新页面，或在设置 → 通用中搜索「提示音」。
 - 查看 Harness 日志中是否有 Client 插件加载失败。
+
+**找不到安装入口**
+
+- 安装入口是左侧边栏的 **插件** 页面，不是 **设置 → 插件**（只读清单）。
+- 侧边栏收起时先展开；「插件」与「定时任务」在同一组全局面板图标中。
 
 **任务结束但没有响**
 
@@ -146,11 +173,11 @@ git init
 git add .
 git commit -m "feat: initial notification-chime plugin"
 git branch -M main
-git remote add origin https://github.com/<your-name>/notification-chime.git
+git remote add origin https://github.com/coopobot/dsh-notification-chime.git
 git push -u origin main
 ```
 
-建议仓库名：`notification-chime` 或 `dsh-notification-chime`。
+仓库地址：https://github.com/coopobot/dsh-notification-chime
 
 ### npm
 
